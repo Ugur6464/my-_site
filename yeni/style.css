@@ -1,0 +1,196 @@
+/* Genel stil */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f7fa;
+    color: #333;
+    scroll-behavior: smooth;
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0 0 10px;
+    font-size: 2.5em;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Bölümler */
+.section {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section:nth-child(even) {
+    background-color: #eef3f9;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+/* Haberler */
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.news-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 15px 20px;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card h3 {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+}
+
+.news-card p {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.news-card a {
+    color: #2575fc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.news-card a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+footer .social a {
+    color: white;
+    text-decoration: none;
+    margin: 0 5px;
+}
+footer .social a:hover {
+    text-decoration: underline;
+}
+.strategy-box {
+    background-color: #f0f4f8;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 900px;
+    margin: 20px auto;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.strategy-box h3 {
+    color: #2575fc;
+    margin-bottom: 10px;
+}
+
+.strategy-box p {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+.strategy-interactive {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.strategy-interactive button {
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.strategy-interactive button:hover {
+    background-color: #6a11cb;
+}
+
+.backtest-box {
+    background-color: #e3f2fd;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.strategy-interactive {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.strategy-interactive button {
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.strategy-interactive button:hover {
+    background-color: #6a11cb;
+}
+
+.backtest-box {
+    background-color: #e3f2fd;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}

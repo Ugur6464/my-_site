@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Trading Sitesi</title>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+    /* Genel Stil */
+    body {font-family: 'Poppins', Arial, sans-serif; margin:0; padding:0; background:#f4f6f9; color:#333; scroll-behavior:smooth;}
+    header {background: linear-gradient(90deg,#6a11cb,#2575fc); color:white; padding:30px 20px; text-align:center; border-bottom:5px solid #fff;}
+    header h1 {margin:0; font-size:2.5em; font-family:'Poppins', sans-serif;}
+    header nav ul {list-style:none; padding:0; margin:15px 0;}
+    header nav ul li {display:inline; margin:0 15px;}
+    header nav ul li a {color:white; text-decoration:none; font-weight:bold; transition:0.3s;}
+    header nav ul li a:hover {text-decoration:underline;}
+
+    .section {padding:50px 20px; max-width:1000px; margin:auto; font-family:'Poppins', sans-serif;}
+    h2, h3 {text-align:center; margin-bottom:25px; color:#333; font-family:'Poppins', sans-serif;}
+
+    /* TradingView ve Kontroller */
+    .controls {text-align:center; margin:15px 0;}
+    .controls select {padding:8px 12px; margin:0 10px; border-radius:6px; border:1px solid #ccc; font-size:1em;}
+    #tradingview_chart {height:500px; max-width:100%; margin:auto; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.1);}
+
+    /* Favori Enstrüman Kartları */
+    #favoritesContainer {display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin:15px 0;}
+    .favorite-card {background:white; padding:10px 15px; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1); width:120px; text-align:center; transition:transform 0.2s, box-shadow 0.2s; font-family:'Poppins', sans-serif;}
+    .favorite-card:hover {transform:scale(1.05); box-shadow:0 6px 18px rgba(0,0,0,0.2);}
+    .favorite-card .symbol {font-weight:bold; margin-bottom:5px;}
+    .favorite-card .price {font-size:1.1em; margin-bottom:5px;}
+    .favorite-card .change {font-weight:bold;}
+    .change.up {color:green;}
+    .change.down {color:red;}
+
+    /* Haber Paneli */
+    .news-container {display:flex; flex-direction:column; gap:15px; max-width:900px; margin:auto;}
+    .news-item {background:#fff; padding:15px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:transform 0.2s, box-shadow 0.2s; display:flex; align-items:center; font-family:'Poppins', sans-serif;}
+    .news-item:hover {transform:scale(1.02); box-shadow:0 6px 18px rgba(0,0,0,0.15);}
+    .news-thumb {width:60px; height:60px; object-fit:cover; border-radius:6px; margin-right:10px;}
+    .news-link {font-weight:bold; text-decoration:none; color:#333;}
+
+    /* Backtest ve Strateji */
+    .backtest-box {background:#f9f9f9; padding:15px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1); margin-top:10px; display:none;}
+    button {padding:8px 12px; border:none; border-radius:6px; cursor:pointer; background:#2575fc; color:white; transition:0.3s; font-family:'Poppins', sans-serif;}
+    button:hover {background:#6a11cb;}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>hoşgeldiniz</h1>
+    <nav>
+        <ul>
+            <li><a href="#about">Hakkımda</a></li>
+            <li><a href="#tradingview_section">Trading</a></li>
+            <li><a href="#strategy">Strateji</a></li>
+            <li><a href="#newsPanel">Haberler</a></li>
+            <li><a href="#contact">İletişim</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="about" class="section">
+    <h2>Hakkımda</h2>
+    <p>Ben Uğur. Web geliştirme ve trading konularıyla ilgileniyorum. Bu site modern, canlı grafik ve haber entegrasyonlarıyla hazırlandı.</p>
+</section>
+
+<section id="tradingview_section" class="section">
+    <h2>Canlı TradingView Grafiği</h2>
+    <div id="favoritesContainer"></div>
+    <div class="controls">
+        <label for="symbolSelect">Enstrüman:</label>
+        <select id="symbolSelect">
+            <option value="BINANCE:BTCUSDT">BTC/USDT</option>
+            <option value="BINANCE:ETHUSDT">ETH/USDT</option>
+            <option value="OANDA:USDJPY">USD/JPY</option>
+            <option value="OANDA:XAUUSD">ALTIN/USD</option>
+        </select>
+        <label for="intervalSelect">Zaman Dilimi:</label>
+        <select id="intervalSelect">
+            <option value="1">1m</option>
+            <option value="5">5m</option>
+            <option value="15">15m</option>
+            <option value="60">1h</option>
+            <option value="240">4h</option>
+            <option value="D">1d</option>
+        </select>
+    </div>
+    <div id="tradingview_chart"></div>
+</section>
+
+<!-- Strateji / Strategy -->
+<section id="strategy" class="section">
+    <h2>Strateji / Strategy</h2>
+    <div class="strategy-box">
+        <h3>Risk Yönetimi / Risk Management</h3>
+        <p>
+            Türkçe: İşlem başına maksimum kayıp %2'yi geçmemelidir. Kasa yönetimi, toplam sermayenizin güvenliği için kritiktir.<br>
+            English: Maximum loss per trade should not exceed 2%. Proper capital management is critical for protecting your total funds.
+        </p>
+        <h3>Kasa Yönetimi / Capital Management</h3>
+        <p>
+            Türkçe: Sermayenizi bölerek farklı pozisyonlarda kullanın. Tek bir işlemi fazla riskli yapmayın.<br>
+            English: Divide your capital across different positions. Avoid overexposing on a single trade.
+        </p>
+    </div>
+
+    <!-- Backtest Butonu ve Bilgi Alanı -->
+    <div class="strategy-interactive" style="text-align:center; margin-top:20px;">
+        <button id="showBacktest">
+            Backtest Notları / Backtest Notes
+        </button>
+        <div id="backtestInfo" class="backtest-box" style="margin-top:15px;">
+            <p>
+                Türkçe: Bu bölümde geçmiş işlemlerin simülasyonu gösterilir. Risk ve kazanç oranlarını test edebilirsiniz.<br>
+                English: This section simulates past trades. You can test risk and profit ratios.
+            </p>
+            <ul>
+                <li>Trade 1: +5% / Trade 2: -2% / Trade 3: +3%</li>
+                <li>Trade 4: -1% / Trade 5: +4%</li>
+                <li>Trade 6: +2% / Trade 7: -3%</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="newsPanel" class="section">
+    <h2>Kripto Haberleri</h2>
+    <div id="newsContainer" class="news-container"></div>
+</section>
+
+<section id="contact" class="section">
+    <h2>İletişim</h2>
+    <p>Email: ugur20243@gmail.com</p>
+
+</section>
+
+<script>
+    // TradingView Widget
+    let tvWidget=null;
+    function loadTradingView(symbol='BINANCE:BTCUSDT', interval='60'){
+        if(tvWidget) tvWidget.remove();
+        tvWidget=new TradingView.widget({
+            container_id:"tradingview_chart",
+            symbol:symbol,
+            interval:interval,
+            timezone:"Etc/UTC",
+            theme:"light",
+            style:"1",
+            locale:"en",
+            toolbar_bg:"#f1f3f6",
+            enable_publishing:false,
+            allow_symbol_change:true,
+            details:true,
+            hide_side_toolbar:false,
+            studies:["MACD@tv-basicstudies","RSI@tv-basicstudies"]
+        });
+    }
+    loadTradingView();
+    document.getElementById('symbolSelect').addEventListener('change', e=>{
+        loadTradingView(e.target.value, document.getElementById('intervalSelect').value);
+    });
+    document.getElementById('intervalSelect').addEventListener('change', e=>{
+        loadTradingView(document.getElementById('symbolSelect').value, e.target.value);
+    });
+
+    // Backtest Toggle
+    document.getElementById('showBacktest').addEventListener('click', ()=>{
+        const box=document.getElementById('backtestInfo');
+        box.style.display=box.style.display==='none'?'block':'none';
+    });
+
+    // Favori Kartları
+    const favContainer=document.getElementById('favoritesContainer');
+    const instruments=['BINANCE:BTCUSDT','BINANCE:ETHUSDT','OANDA:USDJPY','OANDA:XAUUSD'];
+    instruments.forEach(sym=>{
+        const card=document.createElement('div');
+        card.className='favorite-card';
+        card.innerHTML=`<div class="symbol">${sym.split(':')[1]}</div><div class="price">--</div><div class="change">--</div>`;
+        favContainer.appendChild(card);
+    });
+
+    // Canlı Fiyat WebSocket
+    const wsUrls={'BINANCE:BTCUSDT':'wss://stream.binance.com:9443/ws/btcusdt@trade','BINANCE:ETHUSDT':'wss://stream.binance.com:9443/ws/ethusdt@trade'};
+    instruments.forEach((sym,i)=>{
+        if(wsUrls[sym]){
+            const ws=new WebSocket(wsUrls[sym]);
+            ws.onmessage=event=>{
+                const data=JSON.parse(event.data);
+                const price=parseFloat(data.p).toFixed(2);
+                const card=favContainer.children[i];
+                card.querySelector('.price').textContent=price+' USD';
+                card.querySelector('.change').textContent=(Math.random()*2-1).toFixed(2)+'%';
+                card.querySelector('.change').className='change '+((parseFloat(card.querySelector('.change').textContent)>0)?'up':'down');
+            };
+        }
+    });
+
+    // Haber Paneli
+    async function fetchNews(){
+        try{
+            const res=await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN');
+            const data=await res.json();
+            const container=document.getElementById('newsContainer');
+            container.innerHTML='';
+            data.Data.slice(0,5).forEach(item=>{
+                const div=document.createElement('div');
+                div.className='news-item';
+                div.innerHTML=`<img class="news-thumb" src="${item.imageurl||'https://via.placeholder.com/60'}"><a class="news-link" href="${item.url}" target="_blank">${item.title}</a>`;
+                container.appendChild(div);
+            });
+        }catch(err){console.error('Haberler alınamadı:',err);}
+    }
+    fetchNews();
+    setInterval(fetchNews,300000);
+</script>
+
+</body>
+</html>
